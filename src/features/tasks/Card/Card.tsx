@@ -30,7 +30,7 @@ const Card = ({title, goal, score, id, status, }: Habbit) => {
 
     useEffect(() => {
         if (score === goal) dispatch(changeStatus(id, 'completed'));
-    }, [score])
+    }, [score, goal, dispatch, id])
 
     return (
         <div className={styles.card}>
@@ -42,7 +42,7 @@ const Card = ({title, goal, score, id, status, }: Habbit) => {
             {
                 score < goal && status === 'progress'
                 ? (
-                    <>
+                    <> 
                     <button onClick={() => handleAddProgress(id)} className={styles['card__complete-btn']}>Выполнить</button>
                     <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
                     </>
