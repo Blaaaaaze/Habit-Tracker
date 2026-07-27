@@ -1,0 +1,22 @@
+@import './/variables';
+
+@mixin button($_color, $_backgroundColor) {
+    border: 0;
+    border-radius: 1rem;
+    line-height: 1.7;
+    font-size: $main-text;
+    font-weight: 600;
+    background-color: $_backgroundColor;
+    color: $_color;
+
+    &:active {
+        background-color: darken($color: $_backgroundColor, $amount: 20);
+        color: $_color;
+    }
+
+    @media ($desktop) {
+        &:hover {
+            color: rgb(138, 247, 255);
+        }
+    }
+}

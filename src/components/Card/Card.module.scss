@@ -1,0 +1,53 @@
+@import '../../styles/index.scss';
+
+.card {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 84%;
+    min-height: 100px;
+    padding: 1.3rem 1rem;
+    position: relative;
+
+    @media (min-width: $tablet) {
+        width: 360.5px;
+    }
+
+    @media (min-width: $desktop) {
+        width: 30%;
+    }
+
+    &__title {
+        font-size: $h2;
+        margin: 0;
+
+        @media (min-width: $desktop) {
+            font-size: $h2-desktop;
+        }
+    }
+
+    &__result {
+        font-size: $main-text;
+
+        @media (min-width: $desktop) {
+            font-size: $main-text-desktop
+        }
+    }
+
+    &__btn-container {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    &__complete-btn {
+        @include button(white, rgb(47, 198, 248));
+    }
+
+    &__cancel-btn {
+        @include button(white, rgb(247, 125, 89));
+    }
+
+    &__repeat-btn {
+        @include button(white, rgb(47, 248, 181));
+    }
+}

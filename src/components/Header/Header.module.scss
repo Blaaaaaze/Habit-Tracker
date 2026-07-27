@@ -1,0 +1,15 @@
+@import '../../styles/index.scss';
+
+.header {
+    background-color: blue;
+    padding-left: 4.5rem; 
+    
+    &__title {
+        color: white;
+        font-size: $h1;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+
+}

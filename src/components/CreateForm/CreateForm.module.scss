@@ -1,0 +1,40 @@
+@import '../../styles/index.scss';
+
+.form__input, .form__select, .form__btn {
+    height: 2.5rem;
+    border-radius: 0.4rem;
+    border: 0.1rem solid black;
+    margin: 1rem 0.1rem;
+    font-size: $main-text;
+    line-height: 1.5;
+
+    @media (min-width: $tablet) {
+        height: 3.5rem;
+    }
+}
+
+.form__input:focus-visible, .form__select:focus-visible, .form__btn:focus-visible {
+    outline-color: rgb(73, 204, 255);
+}
+
+.form__input {
+    width: 70%;
+    font-size: $main-text;
+    margin-bottom: 1rem;
+
+    @media (min-width: $desktop) {
+        width: 50%;
+    }
+}
+
+.form__btn {
+    @include button(white, rgb(0, 26, 255));
+    border-radius: 50%;
+    width: 2.5rem;
+    padding: 0;
+
+    @media (min-width: $tablet) {
+        width: 3.5rem;
+    }
+}
+

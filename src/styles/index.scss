@@ -1,0 +1,24 @@
+@import "./normalize";
+@import "./mixins";
+@import "./variables";
+
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto
+}
+
+.delete-btn {
+    background-color: transparent;
+    color: red;
+    border: none;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.2rem;
+    font-size: $h2;
+}
