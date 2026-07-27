@@ -9,7 +9,7 @@ import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 
 
 
-const Card = ({title, goal, score, id, status, }: Habbit) => {
+const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
     const [percentage, setPercentage] = useState(Math.min(Math.max((score / goal) * 100, 0), 100));
     const dispatch = useAppDispatch();
 
@@ -17,6 +17,7 @@ const Card = ({title, goal, score, id, status, }: Habbit) => {
         if (score < goal) {
             const newScore = score + 1
             dispatch(addProgress(id));
+            
             setPercentage(Math.min(Math.max((newScore / goal) * 100, 0), 100));
             return;
         }
@@ -43,7 +44,11 @@ const Card = ({title, goal, score, id, status, }: Habbit) => {
                 score < goal && status === 'progress'
                 ? (
                     <> 
-                    <button onClick={() => handleAddProgress(id)} className={styles['card__complete-btn']}>Выполнить</button>
+                    {
+                        (updated_at !== new Date().toDateString()) 
+                        ? <button onClick={() => handleAddProgress(id)} className={styles['card__complete-btn']}>Выполнить</button>
+                        : null
+                    }
                     <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
                     </>
                 )

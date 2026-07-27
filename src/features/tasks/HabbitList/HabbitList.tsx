@@ -10,6 +10,7 @@ const HabbitList = () => {
 
     return (
         <>
+        <h2 className={styles['category-subtitle']}>Активные Привычки</h2>
         <div className={styles.card__container}>
             {
                 activeHabits.length ? 
@@ -21,11 +22,13 @@ const HabbitList = () => {
                         goal={habit.goal} 
                         score={habit.score}
                         status={habit.status}
+                        updated_at={habit.updated_at}
                     />
                 })
-                : <h2>Нет активных привычек</h2>
+                : null
             }
         </div>
+        <h2 className={styles['category-subtitle']}>Завершенные Привычки</h2>
         <div className={styles.card__container}>
             {
                 completedHabits.length ? 
@@ -37,11 +40,13 @@ const HabbitList = () => {
                         goal={habit.goal} 
                         score={habit.score}
                         status={habit.status}
+                        updated_at={habit.updated_at}
                     />
                 })
-                : <h2>Нет Завершенных привычек</h2>
+                : null
             }
         </div>
+        <h2 className={styles['category-subtitle']}>Отмененные Привычки</h2>
         <div className={styles.card__container}>
             {
                 canceledHabits.length ? 
@@ -53,9 +58,10 @@ const HabbitList = () => {
                         goal={habit.goal} 
                         score={habit.score}
                         status={habit.status}
+                        updated_at={habit.updated_at}
                     />
                 })
-                : <h2>Нет Отмененных привычек</h2>
+                : null
             }
         </div>
         </>

@@ -1,5 +1,13 @@
 @import '../../../styles/index.scss';
 
+.category-subtitle {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    @media (min-width: $desktop) {
+        font-size: $h2-desktop;
+    }
+}
+
 .card__container {
     padding: 1rem 2rem;
     display: flex;

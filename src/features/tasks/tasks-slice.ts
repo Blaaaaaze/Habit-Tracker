@@ -24,6 +24,7 @@ const tasksSlice = createSlice({
                     goal: goal,
                     score: 0,
                     status: 'progress',
+                    updated_at: '',
                 }
             })
         },
@@ -33,6 +34,7 @@ const tasksSlice = createSlice({
                 return {
                     ...habit,
                     score: habit.score + 1,
+                    updated_at: new Date().toDateString()
                 }
             })
         },
@@ -42,6 +44,7 @@ const tasksSlice = createSlice({
                 return {
                     ...habit,
                     score: 0,
+                    updated_at: ''
                 }
             })
         },
@@ -62,6 +65,15 @@ const tasksSlice = createSlice({
                 }
             })
         },
+        changeUpdatedTime: (state, action: PayloadAction<string>) => {
+            state.habits = state.habits.map(habit =>{
+                if (habit.id !== action.payload) return habit;
+                return {
+                    ...habit,
+                    updated_at: new Date().toDateString(),
+                }
+            })
+        },
         deleteHabit: (state, action: PayloadAction<string>) => {
             state.habits = state.habits.filter(habit => habit.id !== action.payload);
         }
@@ -70,4 +82,4 @@ const tasksSlice = createSlice({
 });
 
 export const tasksReducer = tasksSlice.reducer;
-export const {createHabit, changeStatus, addProgress, deleteHabit, clearProgress} = tasksSlice.actions
+export const {createHabit, changeStatus, addProgress, deleteHabit, clearProgress, changeUpdatedTime} = tasksSlice.actions

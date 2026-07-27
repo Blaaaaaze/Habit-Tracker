@@ -5,6 +5,7 @@ export type Habbit = {
     title: string,
     goal: number,
     score: number,
-    status: HabbitStatus
+    status: HabbitStatus,
+    updated_at: string,
 }
 
