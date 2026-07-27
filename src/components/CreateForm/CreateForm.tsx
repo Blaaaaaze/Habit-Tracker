@@ -1,13 +1,12 @@
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react';
 import styles from './CreateForm.module.scss';
+import { useAppDispatch } from '../../store';
+import { createHabit } from '../../features/tasks/tasks-slice';
 
-interface CreateFormProps {
-    createHabbit: (title: string, goal: number) => void
-}
-
-const CreateForm = ({createHabbit}: CreateFormProps) => {
+const CreateForm = () => {
     const [inputValue, setInputValue] = useState('');
     const [selectValue, setSelectValue] = useState(7);
+    const dispatch = useAppDispatch();
 
     const handleInput = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -19,7 +18,7 @@ const CreateForm = ({createHabbit}: CreateFormProps) => {
 
     const handleCreate = () => {
         if (inputValue) {
-            createHabbit(inputValue, selectValue);
+            dispatch(createHabit(inputValue, selectValue));
             setInputValue('');
             setSelectValue(7);
         }

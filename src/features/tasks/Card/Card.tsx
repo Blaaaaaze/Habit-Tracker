@@ -1,40 +1,41 @@
 import styles from './Card.module.scss';
-import ProgressBar from '../ProgressBar/ProgressBar';
+
 import { useEffect, useState } from 'react';
-import type { Habbit, HabbitStatus } from '../../types/Habbit';
 
-interface CardProps extends Habbit {
-    addProgress: (id: string, newScore: number) => void,
-    changeStatus: (id: string, newStatus: HabbitStatus) => void,
-    deleteHabbit: (id: string) => void
-}
+import { addProgress, changeStatus, clearProgress, deleteHabit } from '../tasks-slice';
+import { useAppDispatch } from '../../../store';
+import type { Habbit } from '../../../types/Habbit';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 
-const Card = ({title, goal, score, id, status, addProgress, changeStatus, deleteHabbit}: CardProps) => {
+
+
+const Card = ({title, goal, score, id, status, }: Habbit) => {
     const [percentage, setPercentage] = useState(Math.min(Math.max((score / goal) * 100, 0), 100));
+    const dispatch = useAppDispatch();
 
     const handleAddProgress = (id: string) => {
         if (score < goal) {
             const newScore = score + 1
-            addProgress(id, newScore);
+            dispatch(addProgress(id));
             setPercentage(Math.min(Math.max((newScore / goal) * 100, 0), 100));
             return;
         }
     }
 
     const handleRepeatHabbit = (id: string) => {
-        changeStatus(id, 'progress')
-        addProgress(id, 0);
+        dispatch(changeStatus(id, 'progress'))
+        dispatch(clearProgress(id, ));
         setPercentage(0);
     }
 
     useEffect(() => {
-        if (score === goal) changeStatus(id, 'completed');
+        if (score === goal) dispatch(changeStatus(id, 'completed'));
     }, [score])
 
     return (
         <div className={styles.card}>
             <h2 className={styles.card__title}>{title}</h2>
-            <button onClick={() => deleteHabbit(id)} className={styles['delete-btn']}>&times;</button>
+            <button onClick={() => dispatch(deleteHabit(id))} className={styles['delete-btn']}>&times;</button>
             <p className={styles.card__result}>Ваш счёт: {score} / {goal}</p>
             <ProgressBar score={score} goal={goal} percentage={percentage} />
             <div className={styles['card__btn-container']}>
@@ -43,7 +44,7 @@ const Card = ({title, goal, score, id, status, addProgress, changeStatus, delete
                 ? (
                     <>
                     <button onClick={() => handleAddProgress(id)} className={styles['card__complete-btn']}>Выполнить</button>
-                    <button onClick={() => changeStatus(id, 'canceled')} className={styles['card__cancel-btn']}>Отменить</button>
+                    <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
                     </>
                 )
                 : <button className={styles['card__repeat-btn']} onClick={() => handleRepeatHabbit(id)} >Повторить</button>
