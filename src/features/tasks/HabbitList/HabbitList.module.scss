@@ -12,9 +12,12 @@
     padding: 1rem 2rem;
     display: flex;
     gap: 0.7rem;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    scrollbar-width: none;
+    min-height: 179.5px;
 
     @media (min-width: $tablet) {
         flex-direction: row;
