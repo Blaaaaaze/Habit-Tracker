@@ -5,8 +5,10 @@ type HabitsSlice = {
     habits: Habbit[]
 }
 
+const savedHabits = localStorage.getItem('habits');
+
 const initialState: HabitsSlice = {
-    habits: []
+    habits: savedHabits ? JSON.parse(savedHabits) : [],
 }
 
 const tasksSlice = createSlice({
@@ -76,8 +78,7 @@ const tasksSlice = createSlice({
         },
         deleteHabit: (state, action: PayloadAction<string>) => {
             state.habits = state.habits.filter(habit => habit.id !== action.payload);
-        }
-            
+        }    
     },
 });
 

@@ -3,11 +3,16 @@ import Card from "../Card/Card";
 import styles from './HabbitList.module.scss';
 import { getActiveHabits, getCanceledHabits, getCompletedHabits } from "../task-selectors";
 import {AnimatePresence} from 'motion/react';
+import { useEffect } from "react";
 
 const HabbitList = () => {
     const activeHabits = useSelector(getActiveHabits);
     const completedHabits = useSelector(getCompletedHabits);
     const canceledHabits = useSelector(getCanceledHabits);
+    
+    useEffect(() => {
+        localStorage.setItem('habits', JSON.stringify([...activeHabits, ...completedHabits, ...canceledHabits]));
+    }, [activeHabits, canceledHabits, completedHabits]);
 
     return (
         <>
