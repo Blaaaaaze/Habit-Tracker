@@ -6,10 +6,12 @@ import { addProgress, changeStatus, clearProgress, deleteHabit } from '../tasks-
 import { useAppDispatch } from '../../../store';
 import type { Habbit } from '../../../types/Habbit';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
+import Modal from '../../../components/Modal/Modal';
 
 
 
 const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
+    const [isModalOpen, setIsModalsOpen] = useState(false);
     const [percentage, setPercentage] = useState(Math.min(Math.max((score / goal) * 100, 0), 100));
     const dispatch = useAppDispatch();
 
@@ -27,6 +29,19 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
         dispatch(changeStatus(id, 'progress'))
         dispatch(clearProgress(id, ));
         setPercentage(0);
+    }
+
+    const handleDeleteBtn = () => {
+        setIsModalsOpen(true);
+    }
+
+    const completeDelete = () => {
+        dispatch(deleteHabit(id));
+        setIsModalsOpen(false);
+    }
+
+    const cancelDelete = () => {
+        setIsModalsOpen(false);
     }
 
     useEffect(() => {
@@ -59,7 +74,7 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
             }}
         >
             <h2 className={styles.card__title}>{title}</h2>
-            <button onClick={() => dispatch(deleteHabit(id))} className={styles['delete-btn']}>&times;</button>
+            <button onClick={() => handleDeleteBtn()} className={styles['delete-btn']}>&times;</button>
             <p className={styles.card__result}>Ваш счёт: {score} / {goal}</p>
             <ProgressBar score={score} goal={goal} percentage={percentage} />
             <div className={styles['card__btn-container']}>
@@ -91,6 +106,9 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
                     }
                 </AnimatePresence>
             </div>
+            {
+                isModalOpen && <Modal onComplete={completeDelete} onCancel={cancelDelete}/>
+            }
         </motion.div>
     )
 }

@@ -18,6 +18,12 @@ const HabbitList = () => {
     const canceledHabits = useSelector(getCanceledHabits);
 
     const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLElement;
+
+        if (target.closest("button")) {
+            return;
+        }
+
         const container = containerRef.current;
         if (!container) return;
 
@@ -31,7 +37,7 @@ const HabbitList = () => {
     const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
         const container = containerRef.current;
 
-        if (!container || dragStatus.current.isDragging) return;
+        if (!container || !dragStatus.current.isDragging) return;
 
         const delta = e.clientX - dragStatus.current.startX;
 
@@ -54,9 +60,9 @@ const HabbitList = () => {
             className={styles.card__container}
             onPointerDown={(e) => handlePointerDown(e)}
             onPointerMove={(e) => handlePointerMove(e)}
-            onPointerUp={stopDragging}
-            onPointerLeave={stopDragging}
-            onPointerCancel={stopDragging}
+            onPointerUp={() => stopDragging()}
+            onPointerLeave={() => stopDragging()}
+            onPointerCancel={() => stopDragging()}
             >
                 <AnimatePresence >
                     {

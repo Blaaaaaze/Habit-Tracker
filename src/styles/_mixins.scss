@@ -8,6 +8,7 @@
     font-weight: 600;
     background-color: $_backgroundColor;
     color: $_color;
+    cursor: pointer;
 
     &:active {
         background-color: darken($color: $_backgroundColor, $amount: 20);
