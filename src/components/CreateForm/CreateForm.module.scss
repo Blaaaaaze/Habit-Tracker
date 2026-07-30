@@ -11,6 +11,12 @@
     @media (min-width: $tablet) {
         height: 3.5rem;
     }
+
+    @media (min-width: $desktop) {
+        height: 4rem;
+        font-size: $main-text-desktop;
+        line-height: 1.8;
+    }
 }
 
 .form__input:focus-visible, .form__select:focus-visible, .form__btn:focus-visible {
@@ -23,7 +29,7 @@
     margin-bottom: 1rem;
 
     @media (min-width: $desktop) {
-        width: 50%;
+        width: 60%;
     }
 }
 
@@ -32,9 +38,17 @@
     border-radius: 50%;
     width: 2.5rem;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media (min-width: $tablet) {
         width: 3.5rem;
+    }
+
+    @media (min-width: $desktop) {
+        width: 4rem;
+        font-size: $main-text-desktop;
     }
 }
 
