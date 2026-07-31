@@ -75,36 +75,38 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
         >
             <h2 className={styles.card__title}>{title}</h2>
             <button onClick={() => handleDeleteBtn()} className={styles['delete-btn']}>&times;</button>
-            <p className={styles.card__result}>Ваш счёт: {score} / {goal}</p>
-            <ProgressBar score={score} goal={goal} percentage={percentage} />
-            <div className={styles['card__btn-container']}>
-                <AnimatePresence>
-                    {
-                        score < goal && status === 'progress'
-                        ? (
-                            <> 
-                            <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
-                            <AnimatePresence>
-                                {
-                                    (updated_at !== new Date().toDateString()) && <motion.button 
-                                        onClick={() => handleAddProgress(id)} 
-                                        className={styles['card__complete-btn']}
-                                        exit={{
-                                            opacity: 0,
-                                            scale: 0,
-                                        }}
-                                        transition={{
-                                            duration: 0.3
-                                        }}
-                                        
-                                    >Выполнить</motion.button>
-                                }
-                            </AnimatePresence>
-                            </>
-                        )
-                        : <button className={styles['card__repeat-btn']} onClick={() => handleRepeatHabbit(id)} >Повторить</button>
-                    }
-                </AnimatePresence>
+            <div className={styles.card__bottom}>
+                <p className={styles.card__result}>Ваш счёт: {score} / {goal} дней</p>
+                <ProgressBar score={score} goal={goal} percentage={percentage} />
+                <div className={styles['card__btn-container']}>
+                    <AnimatePresence>
+                        {
+                            score < goal && status === 'progress'
+                            ? (
+                                <> 
+                                <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
+                                <AnimatePresence>
+                                    {
+                                        (updated_at !== new Date().toDateString()) && <motion.button 
+                                            onClick={() => handleAddProgress(id)} 
+                                            className={styles['card__complete-btn']}
+                                            exit={{
+                                                opacity: 0,
+                                                scale: 0,
+                                            }}
+                                            transition={{
+                                                duration: 0.3
+                                            }}
+                                            
+                                        >Выполнить</motion.button>
+                                    }
+                                </AnimatePresence>
+                                </>
+                            )
+                            : <button className={styles['card__repeat-btn']} onClick={() => handleRepeatHabbit(id)} >Повторить</button>
+                        }
+                    </AnimatePresence>
+                </div>
             </div>
             {
                 isModalOpen && <Modal onComplete={completeDelete} onCancel={cancelDelete}/>

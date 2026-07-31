@@ -13,7 +13,8 @@
     display: flex;
     gap: 0.7rem;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
+    
     flex-wrap: nowrap;
     overflow: scroll;
     scrollbar-width: none;
