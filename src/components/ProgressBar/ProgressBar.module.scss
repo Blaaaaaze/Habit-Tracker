@@ -9,7 +9,7 @@
 }
 
 .progress {
-    background-color: blue;
+    background-color: $main-color;
     width: var(--progress-width, 0%);
     transition: width 0.3s ease-in-out; 
     height: 100%;

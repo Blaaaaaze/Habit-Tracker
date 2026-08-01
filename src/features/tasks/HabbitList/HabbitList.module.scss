@@ -19,8 +19,4 @@
     overflow: scroll;
     scrollbar-width: none;
     min-height: 179.5px;
-
-    @media (min-width: $tablet) {
-        flex-direction: row;
-    }
 }

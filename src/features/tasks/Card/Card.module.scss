@@ -32,7 +32,7 @@
         font-size: $main-text;
 
         @media (min-width: $desktop) {
-            font-size: $main-text-desktop
+            font-size: $main-text-desktop;
         }
     }
 
@@ -45,17 +45,5 @@
     &__bottom {
         margin-top: auto;
         width: 100%;
-    }
-
-    &__complete-btn {
-        @include button(white, rgb(47, 198, 248));
-    }
-
-    &__cancel-btn {
-        @include button(white, rgb(247, 125, 89));
-    }
-
-    &__repeat-btn {
-        @include button(white, rgb(47, 248, 181));
     }
 }

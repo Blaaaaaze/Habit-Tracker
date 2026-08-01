@@ -84,12 +84,12 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
                             score < goal && status === 'progress'
                             ? (
                                 <> 
-                                <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['card__cancel-btn']}>Отменить</button>
+                                <button onClick={() => dispatch(changeStatus(id, 'canceled'))} className={styles['cancel-btn']}>Отменить</button>
                                 <AnimatePresence>
                                     {
                                         (updated_at !== new Date().toDateString()) && <motion.button 
                                             onClick={() => handleAddProgress(id)} 
-                                            className={styles['card__complete-btn']}
+                                            className={styles['complete-btn']}
                                             exit={{
                                                 opacity: 0,
                                                 scale: 0,
@@ -103,7 +103,7 @@ const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
                                 </AnimatePresence>
                                 </>
                             )
-                            : <button className={styles['card__repeat-btn']} onClick={() => handleRepeatHabbit(id)} >Повторить</button>
+                            : <button className={styles['repeat-btn']} onClick={() => handleRepeatHabbit(id)} >Повторить</button>
                         }
                     </AnimatePresence>
                 </div>

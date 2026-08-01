@@ -1,7 +1,7 @@
 @import '../../styles/index.scss';
 
 .header {
-    background-color: blue;
+    background-color: $main-color;
     padding-left: 4.5rem; 
     
     &__title {

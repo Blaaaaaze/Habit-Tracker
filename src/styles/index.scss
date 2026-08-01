@@ -15,11 +15,23 @@
 
 .delete-btn {
     background-color: transparent;
-    color: red;
+    color: $delete-color;
     border: none;
     position: absolute;
     top: 0.4rem;
     right: 0.2rem;
     font-size: $h2;
     cursor: pointer;
+}
+
+.complete-btn {
+    @include button($positive-color);
+}
+
+.cancel-btn {
+    @include button($negative-color);
+}
+
+.repeat-btn {
+    @include button($secondary-color);
 }

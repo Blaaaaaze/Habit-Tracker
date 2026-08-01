@@ -20,7 +20,7 @@
 }
 
 .form__input:focus-visible, .form__select:focus-visible, .form__btn:focus-visible {
-    outline-color: rgb(73, 204, 255);
+    outline-color: $focus-color;
 }
 
 .form__input {
@@ -34,7 +34,7 @@
 }
 
 .form__btn {
-    @include button(white, rgb(0, 26, 255));
+    @include button($main-color);
     border-radius: 50%;
     width: 2.5rem;
     padding: 0;

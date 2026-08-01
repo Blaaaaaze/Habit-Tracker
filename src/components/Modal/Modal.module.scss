@@ -3,29 +3,21 @@
 .overlay {
     position: fixed;
     inset: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(4px);
-
     z-index: 1000;
 }
 
 .modal {
     width: min(90vw, 420px);
-
     padding: 24px;
-
     border-radius: 16px;
-
     background: #fff;
-
     box-shadow:
         0 12px 32px rgba(0, 0, 0, 0.18);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,12 +27,4 @@
 .btn-container {
     display: flex;
     gap: 0.5rem;
-}
-
-.cancel-btn {
-    @include button(white, rgb(247, 125, 89));
-}
-
-.complete-btn {
-    @include button(white, rgb(47, 198, 248));
 }
