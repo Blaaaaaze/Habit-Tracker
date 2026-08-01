@@ -1,15 +1,16 @@
 @import '../../styles/index.scss';
 
 .form__input, .form__select, .form__btn {
-    height: 2.5rem;
+    height: 3.5rem;
     border-radius: 0.4rem;
     border: 0.1rem solid black;
     margin: 1rem 0.1rem;
     font-size: $main-text;
     line-height: 1.5;
+    background-color: white;
 
     @media (min-width: $tablet) {
-        height: 3.5rem;
+        height: 4rem;
     }
 
     @media (min-width: $desktop) {
@@ -24,7 +25,7 @@
 }
 
 .form__input {
-    width: 70%;
+    width: 65%;
     font-size: $main-text;
     margin-bottom: 1rem;
 
@@ -36,14 +37,14 @@
 .form__btn {
     @include button($main-color);
     border-radius: 50%;
-    width: 2.5rem;
+    width: 3.5rem;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
 
     @media (min-width: $tablet) {
-        width: 3.5rem;
+        width: 4rem;
     }
 
     @media (min-width: $desktop) {
