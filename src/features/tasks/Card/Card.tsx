@@ -1,48 +1,21 @@
 import styles from './Card.module.scss';
 
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import {motion, AnimatePresence} from 'motion/react';
-import { addProgress, changeStatus, clearProgress, deleteHabit } from '../tasks-slice';
+import { changeStatus} from '../tasks-slice';
 import { useAppDispatch } from '../../../store';
 import type { Habbit } from '../../../types/Habbit';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import Modal from '../../../components/Modal/Modal';
+import useProgress from './use-Progress';
+import useModal from './use-Modal';
 
 
 
 const Card = ({title, goal, score, id, status, updated_at}: Habbit) => {
-    const [isModalOpen, setIsModalsOpen] = useState(false);
-    const [percentage, setPercentage] = useState(Math.min(Math.max((score / goal) * 100, 0), 100));
+    const [percentage, handleAddProgress, handleRepeatHabbit] = useProgress({goal, score});
+    const [isModalOpen, handleDeleteBtn, completeDelete, cancelDelete] = useModal(id);
     const dispatch = useAppDispatch();
-
-    const handleAddProgress = (id: string) => {
-        if (score < goal) {
-            const newScore = score + 1
-            dispatch(addProgress(id));
-            
-            setPercentage(Math.min(Math.max((newScore / goal) * 100, 0), 100));
-            return;
-        }
-    }
-
-    const handleRepeatHabbit = (id: string) => {
-        dispatch(changeStatus(id, 'progress'))
-        dispatch(clearProgress(id, ));
-        setPercentage(0);
-    }
-
-    const handleDeleteBtn = () => {
-        setIsModalsOpen(true);
-    }
-
-    const completeDelete = () => {
-        dispatch(deleteHabit(id));
-        setIsModalsOpen(false);
-    }
-
-    const cancelDelete = () => {
-        setIsModalsOpen(false);
-    }
 
     useEffect(() => {
         if (score === goal) dispatch(changeStatus(id, 'completed'));

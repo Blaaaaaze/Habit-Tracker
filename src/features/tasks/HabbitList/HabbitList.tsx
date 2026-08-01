@@ -1,52 +1,13 @@
-import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import styles from './HabbitList.module.scss';
-import { getActiveHabits, getCanceledHabits, getCompletedHabits } from "../task-selectors";
 import {AnimatePresence} from 'motion/react';
-import { useEffect, useRef } from "react";
+import { useEffect} from "react";
+import useHabitList from "./use-HabitList";
+import useDragScroll from "./use-DragScroll";
 
 const HabbitList = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const dragStatus = useRef({
-        isDragging: false,
-        startX: 0,
-        scrollLeft: 0
-    });
-
-    const activeHabits = useSelector(getActiveHabits);
-    const completedHabits = useSelector(getCompletedHabits);
-    const canceledHabits = useSelector(getCanceledHabits);
-
-    const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-        const target = e.target as HTMLElement;
-
-        if (target.closest("button")) {
-            return;
-        }
-
-        const container = containerRef.current;
-        if (!container) return;
-
-        dragStatus.current.isDragging = true;
-        dragStatus.current.startX = e.clientX;
-        dragStatus.current.scrollLeft = container.scrollLeft;
-
-        container.setPointerCapture(e.pointerId);
-    }
-
-    const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-        const container = containerRef.current;
-
-        if (!container || !dragStatus.current.isDragging) return;
-
-        const delta = e.clientX - dragStatus.current.startX;
-
-        container.scrollLeft = dragStatus.current.scrollLeft - delta;
-    }
-
-    const stopDragging = () => {
-        dragStatus.current.isDragging = false;
-    }
+    const [activeHabits, completedHabits, canceledHabits] = useHabitList();
+    const [containerRef, handlePointerDown, handlePointerMove, stopDragging] = useDragScroll();
     
     useEffect(() => {
         localStorage.setItem('habits', JSON.stringify([...activeHabits, ...completedHabits, ...canceledHabits]));
